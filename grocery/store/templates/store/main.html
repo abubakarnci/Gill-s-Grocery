@@ -31,7 +31,47 @@
                     return cookieValue;
                 }
                 const csrftoken = getToken('csrftoken');
-             
+                
+                function getCookie(name){
+                    
+                    //split cookie string
+                    var cookieArr = document.cookie.split(";");
+                    
+                    //loop through array elements
+                    
+                    for(var i =0; i<cookieArr.length; i++){
+                        
+                        var cookiePair= cookieArr[i].split("=");
+                        
+                        //removing whitespace 
+                        
+                        if(name== cookiePair[0].trim()){
+                            
+                            return decodeURIComponent(cookiePair[1])
+                            
+                        }
+                        
+                    }
+                    //return null
+                    return null;
+                    
+                }
+                
+                var cart =JSON.parse(getCookie('cart'))
+                
+                
+                
+                if(cart== undefined){
+                    
+                    cart={}
+                    
+                    console.log('cart was created')
+                    
+                    document.cookie='cart='+ JSON.stringify(cart) + ";domain=;path=/"
+                    
+                }
+                
+                console.log('Cart:', cart)
              
              
            </script>
