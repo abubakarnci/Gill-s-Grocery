@@ -8,6 +8,7 @@ class Customer(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name=models.CharField(max_length=200, null=True)
     email=models.CharField(max_length=200, null=True)
+    profile_pic=models.ImageField(default="icon.png",null=True, blank=True)
     
     def __str__(self):
         return str(self.user)

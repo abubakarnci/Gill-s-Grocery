@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 #creating views here
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CustomerForm
 # Create your views here.
 
 def registerPage(request):
@@ -68,6 +68,20 @@ def logoutUser(request):
     logout(request)
     messages.info(request, 'User logged out')
     return redirect('login')
+
+
+def profile(request):
+    print("profile")
+    customer= request.user.customer
+    form = CustomerForm(instance=customer)
+    
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+    
+    context={'form': form}
+    return render(request, 'store/profile.html', context)
 
 
 
