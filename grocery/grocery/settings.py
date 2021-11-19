@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'store.apps.StoreConfig',
+    
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -128,4 +130,20 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
+# S3
+
+AWS_ACCESS_KEY_ID='AKIA32DTSGGTEG5T52OW'
+AWS_SECRET_ACCESS_KEY='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'
+AWS_STORAGE_BUCKET_NAME='cpp-project1-bucket'
+
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
+
 
