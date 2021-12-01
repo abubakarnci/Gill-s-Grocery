@@ -18,6 +18,9 @@ urlpatterns =[
     path('login/', views.loginPage, name="login"),
     path('logout/', views.logoutUser, name="logout"),
     path('profile/', views.profile, name="profile"),
+    path('details/<int:pk>/', views.details, name="details"),
+    path('product/<int:pk>/add-comment', views.add_comment, name="add-comment"),
+
     
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="store/password_reset.html"), name="reset_password"),
     

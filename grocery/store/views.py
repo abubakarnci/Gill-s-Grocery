@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
+from datetime import datetime
+
 from .models import *
 
 from .utils import cookieCart, cartData, guestOrder
@@ -13,8 +15,11 @@ from django.contrib.auth.decorators import login_required
 
 #creating views here
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm, CustomerForm
+from .forms import CreateUserForm, CustomerForm, CommentForm
 # Create your views here.
+
+#import library
+from recommended_products_pkg.recommended_products import RecommendedProduct
 
 def registerPage(request):
     
@@ -70,6 +75,41 @@ def logoutUser(request):
     return redirect('login')
 
 
+
+def details(request, pk):
+    
+    product=Product.objects.get(id=pk)
+    
+    num_comments = Comment.objects.filter(product=product).count()
+    
+    context={'product': product, 'num_comments':num_comments}
+    return render(request, 'store/details.html', context)
+
+def add_comment(request, pk):
+    product = Product.objects.get(id=pk)
+    
+    form = CommentForm(instance=product)
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=product)
+        if form.is_valid():
+            name = request.user.username
+            body = form.cleaned_data['commenter_body'];
+            c = Comment(product=product, commenter=name, commenter_body=body, date_added=datetime.now())
+            c.save()
+            return redirect('store')
+        else:
+            print('form is invalid')    
+    else:
+        form = CommentForm()    
+
+    context = {
+        'form': form
+    }
+    return render(request, 'store/add_comment.html', context)
+
+
+
 def profile(request):
     print("profile")
     customer= request.user.customer
@@ -100,14 +140,40 @@ def store(request):
 
 def cart(request):
     
+    
+    
+    products=Product.objects.all()
+    
+    listId=[]
+    for i in products:
+        
+        #product=Product.objects.get(id=1).id
+        listId.append(i.id)
+    print(listId, len(listId))
+    #print(Product._meta.pk.name)
+   
+    n= RecommendedProduct()
+    randNum=n.generate_random(len(listId))
+    print('Random number:{}'.format(randNum))
+    
+    #recommended_product=0
+ 
+    recommended_product=Product.objects.get(id=listId[randNum-1])
+    print(recommended_product)
+    
+  
+    
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
         
         
-    context={'items':items , 'order': order, 'cartItems': cartItems}
+    context={'items':items , 'order': order, 'cartItems': cartItems, 'recommended_product':recommended_product}
     return render(request, 'store/cart.html', context)
+
+
+
 
 def checkout(request):
     

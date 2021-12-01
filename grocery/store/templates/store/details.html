@@ -1,0 +1,62 @@
+{% extends 'store/main.html' %}
+
+
+{% load static %}
+
+{% block content %}
+
+ <br>
+ <div class = "container">
+     <div class = "row justify-content-center">
+    <div class="col-md-5">
+            <img  class="card-img-top" src="{{ product.imageURL }}">
+            <div class="box-element product">
+                <h6> <strong>{{product.name}}</strong> </h6>
+                 <hr>
+                 
+                 <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                 
+                 <h4 style="display:inline-block; float: right">€{{product.price|floatformat:2}}</h4>
+                 
+            </div>
+            
+        </div>
+        
+        <div class="col-md-5">
+            <div style=margin:10px>
+                Add Comments ({{num_comments}})
+                
+                <br>
+                <hr>
+                
+                {% if not product.comments.all %}
+                
+                    <p>No comments added yet...</p>
+                
+                {% else %}
+                
+                    {% for comment in product.comments.all %}
+                    
+                        <h3> <strong> {{ comment.commenter }} </strong> </h3>
+                        <p> {{ comment.commenter_body }} </p>
+                        <p> <small> {{ comment.date_added }} </small></p>
+
+                    {% endfor %}
+                
+                {% endif %}
+                
+                    {% if user.is_authenticated %}
+                        <p> <a class= "btn btn-primary" href="{% url 'add-comment' product.id %}"> Add Comment</a> </p>
+                    
+                    {% else %}
+                        <h2>Please sign in to add comment </h2>
+                    {% endif %}
+                
+                
+            </div>
+            
+        </div>
+        </div>
+    </div>
+
+{% endblock content %}

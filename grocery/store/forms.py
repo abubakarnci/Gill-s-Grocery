@@ -17,3 +17,12 @@ class CustomerForm(ModelForm):
         model= Customer
         fields = '__all__'
         exclude = ['user']
+        
+        
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model= Comment
+        fields = ('commenter_body',)
+        widgets = {
+            'commenter_body': forms.Textarea(attrs={'class': 'form-control'}),
+        }

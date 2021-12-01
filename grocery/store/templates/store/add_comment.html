@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+
+
+{% load static %}
+
+{% block content %}
+
+
+    <h1 style= "font-size: 40px; margin-left:30px;" class="p-2"> Add Comment</h1>
+    
+    <div class="container m-5">
+        <form method="POST" action="">
+			    
+			    {%csrf_token%}
+			    {{form.as_p}}
+				
+			<input class="btn btn-primary" type="submit" name="Submit">
+		</form>
+        
+        
+        
+    </div>
+
+
+{% endblock content %}
