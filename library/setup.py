@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="cpp-pkg-muhammadabu",
     # Replace with your own username above
-    version="0.0.1",
+    version="0.0.2",
     author="Muhammad Sani",
     author_email="author@example.com",
     description="A small example package",

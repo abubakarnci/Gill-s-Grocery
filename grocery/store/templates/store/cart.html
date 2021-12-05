@@ -118,7 +118,7 @@
         
         <br>
         <div class="box-element">
-            <h4>Recommended Product</h4> 
+            <h4>Recommended Products</h4> 
             <div class="cart-row">
             
             
@@ -136,9 +136,13 @@
                     
                    <strong> Price</strong> 
                 </div>
+                <div style="flex:1">
+                    
+                   
+                </div>
             </div>
                 
-            
+            {% for recommended_product in recommended_products %}
             <div class="cart-row">
             
             
@@ -156,8 +160,14 @@
                     
                    {{recommended_product.price}} 
                 </div>
-            </div>
                 
+                <div style="flex:1">
+                    
+                   <button data-product={{recommended_product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button> 
+                    <a class="btn btn-outline-success" href="{% url 'details' recommended_product.pk %}">View</a>
+                </div>
+            </div>
+            {% endfor %}    
             
         </div>
         

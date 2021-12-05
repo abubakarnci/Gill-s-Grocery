@@ -23,6 +23,9 @@ from recommended_products_pkg.recommended_products import RecommendedProduct
 
 def registerPage(request):
     
+    data = cartData(request)
+    cartItems = data['cartItems']
+    
     if request.user.is_authenticated:
         return redirect('store')
     
@@ -41,11 +44,14 @@ def registerPage(request):
                 return redirect('login')
                 
         
-        context={'form': form}
+        context={'form': form, 'cartItems': cartItems}
         return render(request, 'store/register.html', context)
 
 
 def loginPage(request):
+    
+    data = cartData(request)
+    cartItems = data['cartItems']
     
     if request.user.is_authenticated:
         return redirect('store')
@@ -66,7 +72,7 @@ def loginPage(request):
                 
             
         
-        context={}
+        context={'cartItems': cartItems}
         return render(request, 'store/login.html', context)
 
 def logoutUser(request):
@@ -78,11 +84,14 @@ def logoutUser(request):
 
 def details(request, pk):
     
+    data = cartData(request)
+    cartItems = data['cartItems']
+    
     product=Product.objects.get(id=pk)
     
     num_comments = Comment.objects.filter(product=product).count()
     
-    context={'product': product, 'num_comments':num_comments}
+    context={'product': product, 'num_comments':num_comments, 'cartItems': cartItems}
     return render(request, 'store/details.html', context)
 
 def add_comment(request, pk):
@@ -111,6 +120,10 @@ def add_comment(request, pk):
 
 
 def profile(request):
+    
+    data = cartData(request)
+    cartItems = data['cartItems']
+    
     print("profile")
     customer= request.user.customer
     form = CustomerForm(instance=customer)
@@ -120,7 +133,7 @@ def profile(request):
         if form.is_valid():
             form.save()
     
-    context={'form': form}
+    context={'form': form, 'cartItems': cartItems}
     return render(request, 'store/profile.html', context)
 
 
@@ -145,6 +158,8 @@ def cart(request):
     products=Product.objects.all()
     
     listId=[]
+    randId=[]
+    recommended_products=[]
     for i in products:
         
         #product=Product.objects.get(id=1).id
@@ -153,13 +168,14 @@ def cart(request):
     #print(Product._meta.pk.name)
    
     n= RecommendedProduct()
-    randNum=n.generate_random(len(listId))
-    print('Random number:{}'.format(randNum))
+    randId=n.generate_random(listId)
+    print('Random number:{}'.format(randId))
     
     #recommended_product=0
  
-    recommended_product=Product.objects.get(id=listId[randNum-1])
-    print(recommended_product)
+    for x in range (3):
+        recommended_products.append(Product.objects.get(id=randId[x]))
+    print(recommended_products)
     
   
     
@@ -169,7 +185,7 @@ def cart(request):
     items = data['items']
         
         
-    context={'items':items , 'order': order, 'cartItems': cartItems, 'recommended_product':recommended_product}
+    context={'items':items , 'order': order, 'cartItems': cartItems, 'recommended_products':recommended_products}
     return render(request, 'store/cart.html', context)
 
 
