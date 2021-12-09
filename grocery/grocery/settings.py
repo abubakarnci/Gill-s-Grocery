@@ -77,25 +77,24 @@ WSGI_APPLICATION = 'grocery.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'cpp_project',
-#            #os.path.join(BASE_DIR, 'db.sqlite3'),
-#        'USER' : 'abubakar',
-#        'PASSWORD': '123456789',
-#        'HOST' :'database-2.c7mf0ysgbowi.us-east-1.rds.amazonaws.com',
-#        'PORT': '5432'
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cpp_project',
+            #os.path.join(BASE_DIR, 'db.sqlite3'),
+        'USER' : 'abubakar',
+        'PASSWORD': '123456789',
+        'HOST' :'database-2.c7mf0ysgbowi.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -152,7 +151,7 @@ AWS_STORAGE_BUCKET_NAME='cpp-project1-bucket'
 
 AWS_S3_FILE_OVERWRITE=False
 AWS_DEFAULT_ACL=None
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
