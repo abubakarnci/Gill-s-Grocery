@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
-from datetime import datetime
+#from datetime import datetime
 
 from .models import *
 
