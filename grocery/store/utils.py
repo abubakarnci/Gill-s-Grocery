@@ -1,6 +1,8 @@
 import json
 from .models import *
 
+# cookies for items added to basket
+
 def cookieCart(request):
     
     try:
@@ -59,7 +61,6 @@ def cartData(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items= order.orderitem_set.all()
         cartItems = order.get_cart_items
-
         
     else:
         cookieData = cookieCart(request)

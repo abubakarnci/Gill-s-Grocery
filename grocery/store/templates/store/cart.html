@@ -10,10 +10,12 @@
         
         <div class="box-element">
             
+            <!-- continue shopping button -->
             <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
             <br>
             <br>
             
+            <!-- total number of items in basket -->
             <table class="table">
                 <tr>
                     <th> 
@@ -25,6 +27,7 @@
                     
                     </th>
                     <th> 
+                    <!-- total bill -->
                         <h5>Total: 
                         
                             <strong>€{{ order.get_cart_total|floatformat:2 }}</strong>
@@ -33,7 +36,7 @@
                     
                     </th>
                     <th>
-                        
+                        <!-- checkout button -->
                         <a style="float:right; margin:5px" class="btn btn-success" href= "{% url 'checkout' %}">Checkout</a>
                         
                     </th>
@@ -48,7 +51,7 @@
         
         <div class="box-element">
             
-            
+            <!-- list of items in basket with details -->
             <div class="cart-row">
                 
                 <div style="flex:2">
@@ -117,6 +120,7 @@
         </div>
         
         <br>
+        <!-- displaying recommended products -->
         <div class="box-element">
             <h4>Recommended Products</h4> 
             <div class="cart-row">

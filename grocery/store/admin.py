@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from .models import *
 
-
+# tables name from models.py
 admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order)

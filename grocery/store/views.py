@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
-import datetime
-#from datetime import datetime
+#import datetime
+from datetime import datetime
 
 from .models import *
 
@@ -18,8 +18,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, CustomerForm, CommentForm
 # Create your views here.
 
-#import library
+#importing my library
 from recommended_products_pkg.recommended_products import RecommendedProduct
+
+# calculations, actions and return values of each page will specify here
 
 def registerPage(request):
     
@@ -236,6 +238,8 @@ def updateItem(request):
     
     
 def processOrder(request):
+    
+    import datetime
     
     transaction_id = datetime.datetime.now().timestamp()
     

@@ -77,6 +77,7 @@ WSGI_APPLICATION = 'grocery.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# Connecting RDS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

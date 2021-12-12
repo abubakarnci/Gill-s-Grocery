@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from .models import Customer
 
+# this is for relationship between customer and user table
+# when new account will be created
 
 @receiver(post_save, sender=User)        
 def create_customer(sender, instance, created, **kwargs):

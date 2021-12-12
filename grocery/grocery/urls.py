@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-
+# calling URLs
 urlpatterns = [
+    # main admin pages
     path('admin/', admin.site.urls),
+    
+    # accessing URLs in store/urls.py 
     path('', include('store.urls')),
 ]
 

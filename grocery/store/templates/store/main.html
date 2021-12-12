@@ -2,7 +2,8 @@
 {% load static%}
 <html>
     <head>
-           <title>Ecom</title>
+        <!-- nav bar -->
+           <title>Gill's Grocery</title>
            <style>
                
                .hello-msg{
@@ -100,6 +101,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <!-- if user is logged in -->
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="{% url 'store' %}">Store</a>
@@ -109,6 +111,7 @@
                       <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
                     </li>
                 {% else %}
+                <!-- if user is guest -->
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="{% url 'store' %}">Store</a>
                     </li>

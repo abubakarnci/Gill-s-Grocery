@@ -6,7 +6,9 @@ from . import views
 
 urlpatterns =[
     
-    # leave as empty string from home page
+    # url for each html page
+    
+    # leave empty string for home page
     path('', views.store, name="store"),
     path('cart/', views.cart, name="cart"),
     path('checkout/', views.checkout, name="checkout"),
